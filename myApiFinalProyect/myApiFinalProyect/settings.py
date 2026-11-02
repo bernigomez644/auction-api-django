@@ -1,3 +1,4 @@
+import os
 from datetime import timedelta
 
 """
@@ -22,10 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-nv#rny3=n=19c5^p&sf5xxxhvoxe_mn7mli27kxbl=bda^#50z"
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-nv#rny3=n=19c5^p&sf5xxxhvoxe_mn7mli27kxbl=bda^#50z",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0"]
 
